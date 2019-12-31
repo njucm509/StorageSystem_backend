@@ -18,7 +18,11 @@
 
 <configuration>
     <property>
-        <name>fs.default.name</name>
-        <value>hdfs://localhost:8020</value>
+        <name>dfs.webhdfs.enabled</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>dfs.permissions</name>
+        <value>false</value>
     </property>
 </configuration>

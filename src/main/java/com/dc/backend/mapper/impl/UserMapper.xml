@@ -17,17 +17,17 @@
     <insert id="create">
         insert into wp_user (id,name,account,password,create_time,update_time) values (null,#{name},#{account},#{password},now(),now())
     </insert>
-    <insert id="delete/{id}">
-        delete from wp_user where id=null
-    </insert>
-    <insert id="list" >
+    <delete id="delete">
+        delete from wp_user where id=#{id}
+    </delete>
+    <select id="queryAll" resultType="UserPojo" resultMap="BaseResultMap">
         select * from wp_user
-    </insert>
-    <insert id="{id}" >
-        select * from wp_user where id=null
-    </insert>
-    <insert id="update" >
+    </select>
+    <select id="queryById" resultType="UserPojo" resultMap="BaseResultMap">
+        select * from wp_user where id=#{id}
+    </select>
+    <update id="update">
         update wp_user set id=null,name=#{name},account=#{account},password=#{password},create_time=now(),update_time=now()
-    </insert>
+    </update>
 
 </mapper>
