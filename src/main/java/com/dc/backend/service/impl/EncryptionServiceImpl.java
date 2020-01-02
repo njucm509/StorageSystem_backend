@@ -3,10 +3,12 @@ package com.dc.backend.service.impl;
 import com.dc.backend.params.FileParam;
 import com.dc.backend.service.EncryptionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.ServletContext;
 import java.io.File;
 
+@Service
 public class EncryptionServiceImpl implements EncryptionService {
 
     @Autowired
