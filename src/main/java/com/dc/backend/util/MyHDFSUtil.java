@@ -15,18 +15,20 @@ public class MyHDFSUtil {
 
     private static String namenode;
     private static String fsPort;
-    private static String defaultPath = "/user/file/";
+    private static String defaultPath = "/input/";
 
     static {
+        System.setProperty("hadoop.home.dir", "/usr/local/Cellar/hadoop/3.2.1");
         Properties p = new Properties();
         try {
             p.load(MyHDFSUtil.class.getResourceAsStream(HDFS_PROPERTIES));
             namenode = p.getProperty("namenode");
             fsPort = p.getProperty("fs_port");
+            log.info("hdfs: {}:{}", namenode, fsPort);
         } catch (IOException e) {
-            log.error("can not read from spark.properties:{}", e.getMessage());
+            log.error("can not read from hdfs.properties:{}", e.getMessage());
         } finally {
-            createDefaultFilePath();
+//            createDefaultFilePath();
         }
     }
 
@@ -78,10 +80,13 @@ public class MyHDFSUtil {
     public static FileSystem getFileSystem() {
         Configuration configuration = new Configuration();
         configuration.set("fs.hdfs.impl", "org.apache.hadoop.hdfs.DistributedFileSystem");
-        configuration.set("fs.defaultFS", "hdfs://" + namenode + ":" + fsPort);
+        String path = "hdfs://" + namenode + ":" + fsPort;
+        log.info("path: {}", path);
+        configuration.set("fs.defaultFS", path);
+        configuration.set("dfs.permissions", "false");
         FileSystem fileSystem = null;
         try {
-            fileSystem = FileSystem.newInstance(configuration);
+            fileSystem = FileSystem.get(configuration);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -89,7 +94,10 @@ public class MyHDFSUtil {
     }
 
     public static void main(String[] args) {
-        FileSystem fileSystem = getFileSystem();
-        log.info("{} init...", fileSystem);
+//        FileSystem fileSystem = getFileSystem();
+
+//        log.info("{} init...", fileSystem);
+        boolean b = findFileByFileName("test.csv");
+        System.out.println(b);
     }
 }

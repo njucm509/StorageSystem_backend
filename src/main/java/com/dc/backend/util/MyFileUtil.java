@@ -6,6 +6,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.spark.api.java.JavaSparkContext;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -34,5 +35,18 @@ public class MyFileUtil {
             list.add(cellIterator.next().getStringCellValue());
         }
         return list.toArray(new String[0]);
+    }
+
+    public static boolean readCsvToHBaseBySpark(String HDFSPath, String filename) {
+        boolean flag = false;
+        JavaSparkContext sc = MySparkUtil.getJavaSparkContext();
+        sc.textFile(HDFSPath);
+        String tabeName = filename.split("\\.")[0];
+        log.info("table: {}", tabeName);
+        return flag;
+    }
+
+    public static void main(String[] args) {
+        readCsvToHBaseBySpark("hdfs://127.0.0.1:8020/input/test.csv", "test.csv");
     }
 }

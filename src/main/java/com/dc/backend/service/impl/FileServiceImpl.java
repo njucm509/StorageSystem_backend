@@ -47,24 +47,27 @@ public class FileServiceImpl implements FileService {
         return res;
     }
 
-    public HashMap<String, Object> listFile() {
+    public List<HashMap<String, Object>> listFile() {
         String filePath = context.getRealPath("/user/upload");
         File file = new File(filePath);
         if (!file.exists()) {
             file.mkdirs();
         }
         File[] files = file.listFiles();
-        HashMap<String, Object> res = new HashMap<>();
+        List<HashMap<String, Object>> res = new ArrayList<>();
+        HashMap<String, Object> map = new HashMap<>();
         if (files.length == 0) {
-            res.put("msg", "no");
+            map.put("msg", "no");
+            res.add(map);
             return res;
         }
-        res.put("msg", "ok");
-        List<String> list = new ArrayList<>();
+        int i = 1;
         for (File f : files) {
-            list.add(f.getName());
+            HashMap<String, Object> data = new HashMap<>();
+            data.put("id", i++);
+            data.put("filename", f.getName());
+            res.add(data);
         }
-        res.put("data", list);
         return res;
     }
 
@@ -94,9 +97,20 @@ public class FileServiceImpl implements FileService {
             HashMap<String, String> map = new HashMap<>();
             map.put("content", s);
             map.put("encryption", "rsa");
-            map.put("default", "1");
+            map.put("defaultEnc", "1");
             list.add(map);
         }
         return list;
+    }
+
+    public void delete(String filename) {
+        String filePath = context.getRealPath("/user/upload");
+        File file = new File(filePath);
+        File[] files = file.listFiles();
+        for (File f : files) {
+            if (f.getName().equals(filename)) {
+                f.delete();
+            }
+        }
     }
 }

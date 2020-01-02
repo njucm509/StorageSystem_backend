@@ -1,30 +1,34 @@
 package com.dc.backend.service.impl;
 
+import com.dc.backend.params.FileParam;
 import com.dc.backend.service.EncryptionService;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.servlet.ServletContext;
+import java.io.File;
 
 public class EncryptionServiceImpl implements EncryptionService {
-    @Override
-    public void aes() {
 
-    }
-
-    @Override
-    public void rsa() {
-
-    }
+    @Autowired
+    ServletContext context;
 
     @Override
-    public void md5() {
-
-    }
-
-    @Override
-    public void ecc() {
-
-    }
-
-    @Override
-    public void shamir() {
+    public String encrypt(FileParam param) {
+        String filename = param.getFilename();
+        String realPath = context.getRealPath("/user/upload");
+        File dir = new File(realPath);
+        File[] files = dir.listFiles();
+        File cur = null;
+        for (File file : files) {
+            if (file.getName().equals(filename)) {
+                cur = file;
+            }
+        }
+        if (cur == null) {
+            return "no file";
+        } else {
+            return "";
+        }
 
     }
 }

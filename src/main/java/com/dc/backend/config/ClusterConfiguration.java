@@ -6,6 +6,6 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "cluster")
 @Component
 public class ClusterConfiguration {
-    private String host;
-    private String port;
+    private String hdfsPath;
+    private String sparkPath;
 }

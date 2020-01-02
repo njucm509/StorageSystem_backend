@@ -37,7 +37,7 @@ public class FileController {
      * @return
      */
     @RequestMapping("/file/list")
-    public HashMap<String, Object> listFile() {
+    public List<HashMap<String, Object>> listFile() {
         return fileService.listFile();
     }
 
@@ -45,6 +45,16 @@ public class FileController {
     public List<HashMap<String, String>> getHeader(@RequestBody FileParam param) {
         log.info("{} get header...", param.getFilename());
         return fileService.getHeader(param.getFilename());
+    }
+
+    /**
+     * 删除文件
+     *
+     * @param filename
+     */
+    @RequestMapping("file/delete/{filename}")
+    public void deleteFile(@PathVariable("filename") String filename) {
+        fileService.delete(filename);
     }
 
 }

@@ -1,4 +1,4 @@
-package com.njucm.common.pojo;
+package com.dc.backend.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
