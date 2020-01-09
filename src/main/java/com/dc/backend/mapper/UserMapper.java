@@ -1,14 +1,12 @@
 package com.dc.backend.mapper;
 
-import com.dc.backend.pojo.UserPojo;
+import com.dc.backend.pojo.User;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
 
-import java.util.List;
-
 @Repository
-public interface UserMapper extends Mapper<UserPojo> {
-    UserPojo login(UserPojo user);
+public interface UserMapper extends Mapper<User> {
+    User login(User user);
 
 //    void create(UserPojo user);
 //
@@ -18,5 +16,5 @@ public interface UserMapper extends Mapper<UserPojo> {
 //
 //    UserPojo queryById(@Param("id") Integer id);
 //
-    void update(UserPojo userPojo);
+    void update(User user);
 }

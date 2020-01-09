@@ -31,5 +31,15 @@ server:
 mybatis:
   mapper-locations: com/dc/backend/mapper/impl/*.xml
   type-aliases-package: com/dc/backend/pojo
-cluster:
-  hdfsPath: namenode:8020
+spark:
+  app:
+    name: Spring Boot Spark
+  home: /user/local/spark
+  master:
+    uri: local
+hadoop:
+  home: /usr/local/Cellar/hadoop/3.2.1
+  user: weilin
+  hdfs:
+    uri: localhost:8020
+    userFilePath: /input

@@ -2,22 +2,22 @@ package com.dc.backend.service;
 
 import com.dc.backend.entity.PageParam;
 import com.dc.backend.entity.PageResult;
-import com.dc.backend.pojo.UserPojo;
+import com.dc.backend.pojo.User;
 
 import java.util.List;
 
 public interface UserService {
-    UserPojo login(UserPojo user);
+    User login(User user);
 
-    void create(UserPojo user);
+    void create(User user);
 
-    void delete(UserPojo userPojo);
+    void delete(User user);
 
-    List<UserPojo> queryAll();
+    List<User> queryAll();
 
-    UserPojo queryById(Integer id);
+    User queryById(Integer id);
 
-    void update(UserPojo userPojo);
+    void update(User user);
 
-    PageResult<UserPojo> queryUserByPageAndSort(PageParam pageParam);
+    PageResult<User> queryUserByPageAndSort(PageParam pageParam);
 }

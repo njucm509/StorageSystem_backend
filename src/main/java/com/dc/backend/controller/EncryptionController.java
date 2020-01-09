@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequestMapping("/api")
@@ -17,8 +20,14 @@ public class EncryptionController {
     EncryptionService encryptionService;
 
     @RequestMapping("/encrypt")
-    public String encrypt(@RequestBody FileParam param) {
+    public List<List<String>> encrypt(@RequestBody FileParam param) {
         log.info("filename: {} --list: {}", param.getFilename(), param.getList());
-        return encryptionService.encrypt(param);
+        List<List<String>> res = null;
+        try {
+            res = encryptionService.encrypt(param);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return res;
     }
 }

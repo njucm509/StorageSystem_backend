@@ -17,32 +17,24 @@ public class ExecUtil {
         List<Device> list = new ArrayList<>();
         Device device = new Device();
         try {
-            Process ps = Runtime.getRuntime().exec("docker stats --no-stream");
+            Process ps = Runtime.getRuntime().exec("ls /");
             BufferedReader br = new BufferedReader(new InputStreamReader(ps.getInputStream()));
 //            StringBuffer sb = new StringBuffer();
             String line;
             while ((line = br.readLine())!= null) {
+                System.out.println(line);
+
 //                sb.append(line).append("\n");
                 String[] str = line.split("\\s+");
-                if (str.length == 14) {
-                    device.setContainerId(str[0]);
-                    device.setName(str[1]);
-                    device.setCpu(str[2]);
-                    device.setCurMemory(str[3]);
-                    device.setMaxMemory(str[5]);
-                    device.setMemory(str[6]);
-                    device.setNetIn(str[7]);
-                    device.setNetOut(str[9]);
-                    device.setBlockIn(str[10]);
-                    device.setBlockOut(str[12]);
-                    device.setPids(str[13]);
-                    device.setCurDate(new Date());
-                }
-                list.add(device);
+                System.out.println(str);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public static void main(String[] args) {
+        getDeviceInfo();
     }
 }

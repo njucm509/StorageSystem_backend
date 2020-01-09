@@ -8,6 +8,7 @@ import javax.crypto.*;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.UnsupportedEncodingException;
+import java.util.Random;
 
 @Slf4j
 public class AESUtil {
@@ -96,13 +97,32 @@ public class AESUtil {
         }
     }
 
+    public static String generateKey(Integer userId) {
+        String str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String user = String.valueOf(userId);
+        int len = user.length();
+        if (len > 8) {
+            user = user.substring(0, 8);
+        } else {
+            Random random = new Random();
+            for (int i = 0; i < 8 - len; i++) {
+                int number = random.nextInt(52);
+                user += str.charAt(number);
+            }
+        }
+        return user;
+    }
+
     public static void main(String[] args) throws UnsupportedEncodingException {
-        String content = "xxxxxxxxxxxx";
-        System.out.println("加密前" + content);
-        System.out.println("加密密钥和解密密钥" + KEY);
-        String encrypt = encrypt(content.getBytes(defaultCharset), KEY.getBytes(defaultCharset));
-        System.out.println("加密后" + new String(encrypt));
-        String decrypt = decrypt(encrypt, KEY.getBytes(defaultCharset));
-        System.out.println("解密后" + new String(decrypt));
+//        String content = "xxxxxxxxxxxx";
+//        System.out.println("加密前" + content);
+//        System.out.println("加密密钥和解密密钥" + KEY);
+//        String encrypt = encrypt(content.getBytes(defaultCharset), KEY.getBytes(defaultCharset));
+//        System.out.println("加密后" + new String(encrypt));
+//        String decrypt = decrypt(encrypt, KEY.getBytes(defaultCharset));
+//        System.out.println("解密后" + new String(decrypt));
+
+        System.out.println(generateKey(123456));
+
     }
 }

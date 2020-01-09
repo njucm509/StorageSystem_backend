@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -28,7 +29,13 @@ public class FileController {
     @RequestMapping("/file/upload")
     public HashMap<String, String> handleFileUpload(MultipartFile file) {
         log.info("{} enter...", file.getOriginalFilename());
-        return fileService.handleFileUpload(file);
+        HashMap<String, String> res = null;
+        try {
+            res = fileService.handleFileUpload(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return res;
     }
 
     /**
@@ -38,13 +45,25 @@ public class FileController {
      */
     @RequestMapping("/file/list")
     public List<HashMap<String, Object>> listFile() {
-        return fileService.listFile();
+        List<HashMap<String, Object>> res = null;
+        try {
+            res =  fileService.listFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return res;
     }
 
     @RequestMapping("/file/header")
     public List<HashMap<String, String>> getHeader(@RequestBody FileParam param) {
         log.info("{} get header...", param.getFilename());
-        return fileService.getHeader(param.getFilename());
+        List<HashMap<String, String>> res = null;
+        try {
+            res = fileService.getHeader(param.getFilename());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return res;
     }
 
     /**
@@ -54,7 +73,11 @@ public class FileController {
      */
     @RequestMapping("file/delete/{filename}")
     public void deleteFile(@PathVariable("filename") String filename) {
-        fileService.delete(filename);
+        try {
+            fileService.delete(filename);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

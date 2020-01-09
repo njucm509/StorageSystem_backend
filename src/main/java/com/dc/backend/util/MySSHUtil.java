@@ -58,7 +58,8 @@ public class MySSHUtil {
         log.info("session:{}", session);
         try {
 //            session.execCommand("/Users/terminus/Downloads/大创项目\\ 数据加密/backend/shell/device.sh");
-            session.execCommand("docker stats --no-stream > /Users/terminus/Downloads/大创项目\\ 数据加密/backend/device/device.out");
+//            session.execCommand("docker stats --no-stream > /Users/terminus/Downloads/大创项目\\ 数据加密/backend/device/device.out");
+            session.execCommand("ls /");
             InputStream stdout = new StreamGobbler(session.getStdout());
             BufferedReader stdoutReader = new BufferedReader(new InputStreamReader(stdout));
             String line = null;
@@ -73,5 +74,9 @@ public class MySSHUtil {
             e.printStackTrace();
         }
 
+    }
+
+    public static void main(String[] args) {
+        startMonitor();
     }
 }

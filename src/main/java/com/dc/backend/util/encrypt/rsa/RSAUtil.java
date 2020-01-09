@@ -21,7 +21,7 @@ public class RSAUtil {
     /**
      * 生成密钥对
      */
-    public static Map<String, String> generateKeyPair() throws Exception {
+    public static HashMap<String, String> generateKeyPair() throws Exception {
         /** RSA算法要求有一个可信任的随机数源 */
         SecureRandom sr = new SecureRandom();
         /** 为RSA算法创建一个KeyPairGenerator对象 */
@@ -41,7 +41,7 @@ public class RSAUtil {
         String pri = new String(Base64.encodeBase64(privateKeyBytes),
                 ConfigureEncryptAndDecrypt.CHAR_ENCODING);
 
-        Map<String, String> map = new HashMap<String, String>();
+        HashMap<String, String> map = new HashMap<String, String>();
         map.put("publicKey", pub);
         map.put("privateKey", pri);
         RSAPublicKey rsp = (RSAPublicKey) kp.getPublic();

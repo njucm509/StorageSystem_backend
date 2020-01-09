@@ -34,6 +34,26 @@ public class MyHbaseUtil {
      */
     private final static String ZK_PORT_VALUE = "2181";
 
+    public static String getZkQuorum() {
+        return ZK_QUORUM;
+    }
+
+    public static String getZkClientPort() {
+        return ZK_CLIENT_PORT;
+    }
+
+    public static String getHbasePos() {
+        return HBASE_POS;
+    }
+
+    public static String getZkPos() {
+        return ZK_POS;
+    }
+
+    public static String getZkPortValue() {
+        return ZK_PORT_VALUE;
+    }
+
     private static Configuration configuration;
 
     static {

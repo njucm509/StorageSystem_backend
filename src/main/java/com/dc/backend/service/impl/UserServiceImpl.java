@@ -3,7 +3,7 @@ package com.dc.backend.service.impl;
 import com.dc.backend.entity.PageParam;
 import com.dc.backend.entity.PageResult;
 import com.dc.backend.mapper.UserMapper;
-import com.dc.backend.pojo.UserPojo;
+import com.dc.backend.pojo.User;
 import com.dc.backend.service.UserService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -23,24 +23,24 @@ public class UserServiceImpl implements UserService {
     UserMapper mapper;
 
     @Override
-    public UserPojo login(UserPojo user) {
+    public User login(User user) {
         return mapper.login(user);
     }
 
     @Override
-    public void create(UserPojo user) {
+    public void create(User user) {
         mapper.insertSelective(user);
     }
 
     @Override
-    public void delete(UserPojo user) {
+    public void delete(User user) {
         mapper.delete(user);
     }
 
     @Override
-    public PageResult<UserPojo> queryUserByPageAndSort(PageParam pageParam) {
+    public PageResult<User> queryUserByPageAndSort(PageParam pageParam) {
         PageHelper.startPage(pageParam.getPage(), pageParam.getRows());
-        Example example = new Example(UserPojo.class);
+        Example example = new Example(User.class);
         if (StringUtils.isNotBlank(pageParam.getKey())) {
             example.createCriteria().andLike("name", "%" + pageParam.getKey() + "%");
         }
@@ -48,23 +48,23 @@ public class UserServiceImpl implements UserService {
             String orderByClause = pageParam.getSortBy() + (pageParam.getDesc() ? " DESC" : " ASC");
             example.setOrderByClause(orderByClause);
         }
-        Page<UserPojo> pageInfo = (Page<UserPojo>) mapper.selectByExample(example);
+        Page<User> pageInfo = (Page<User>) mapper.selectByExample(example);
         log.info("pageInfo: {}", pageInfo);
         return new PageResult<>(pageInfo.getTotal(), pageInfo);
     }
 
     @Override
-    public List<UserPojo> queryAll() {
+    public List<User> queryAll() {
         return mapper.selectAll();
     }
 
     @Override
-    public UserPojo queryById(Integer id) {
-        return (UserPojo) mapper.selectByPrimaryKey(id);
+    public User queryById(Integer id) {
+        return (User) mapper.selectByPrimaryKey(id);
     }
 
     @Override
-    public void update(UserPojo userPojo) {
-        mapper.update(userPojo);
+    public void update(User user) {
+        mapper.update(user);
     }
 }

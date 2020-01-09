@@ -1,18 +1,29 @@
 package com.dc.backend.util;
 
+import com.dc.backend.params.FileHeaderParam;
+import com.dc.backend.params.FileParam;
+import com.dc.backend.pojo.User;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.hadoop.hbase.HTableDescriptor;
+import org.apache.hadoop.hbase.client.HBaseAdmin;
+import org.apache.hadoop.hbase.client.Put;
+import org.apache.hadoop.hbase.io.ImmutableBytesWritable;
+import org.apache.hadoop.hbase.mapreduce.TableOutputFormat;
+import org.apache.hadoop.mapreduce.Job;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.api.java.function.PairFunction;
+import org.springframework.stereotype.Component;
+import scala.Tuple2;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Slf4j
 public class MyFileUtil {
@@ -37,16 +48,9 @@ public class MyFileUtil {
         return list.toArray(new String[0]);
     }
 
-    public static boolean readCsvToHBaseBySpark(String HDFSPath, String filename) {
-        boolean flag = false;
-        JavaSparkContext sc = MySparkUtil.getJavaSparkContext();
-        sc.textFile(HDFSPath);
-        String tabeName = filename.split("\\.")[0];
-        log.info("table: {}", tabeName);
-        return flag;
-    }
+    public static File convertExcelToCsv(File file) throws IOException {
+        File csv = File.createTempFile(file.getName(), "csv");
 
-    public static void main(String[] args) {
-        readCsvToHBaseBySpark("hdfs://127.0.0.1:8020/input/test.csv", "test.csv");
+        return csv;
     }
 }

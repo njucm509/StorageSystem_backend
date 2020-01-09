@@ -3,6 +3,9 @@ package com.dc.backend.util;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.sql.Dataset;
+import org.apache.spark.sql.Row;
+import org.apache.spark.sql.SparkSession;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -29,12 +32,25 @@ public class MySparkUtil {
         System.setProperty("hadoop.home.dir", "/usr/local/Cellar/hadoop/3.2.1");
         SparkConf conf = new SparkConf()
                 .setAppName("Spark app")
-                .setMaster("spark://127.0.0.1:7077");
+                .setSparkHome("/user/local/spark")
+                .setMaster("local");
         JavaSparkContext sc = new JavaSparkContext(conf);
         return sc;
     }
 
     public static void main(String[] args) {
+        SparkSession sparkSession = SparkSession
+                .builder()
+                .master("local")
+                .appName("java spark sql")
+                .config("spark.some.config.option", "some-value")
+                .getOrCreate();
+        Dataset<Row> dataset = sparkSession
+                .read()
+                .option("header", "true")
+                .csv("hdfs://localhost:8020/input/test.csv");
 
+
+        dataset.show();
     }
 }
