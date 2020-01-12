@@ -30,6 +30,10 @@ public class MyEncryptUtil {
     public static String encrypt(String content, String enc, List<HashMap<String, String>> keyList) throws Exception {
         HashMap<String, String> keyMap = keyList.get(0);
         String aesKey = keyMap.get("aes");
+        int length = aesKey.length();
+        byte[] bytes = aesKey.getBytes();
+        int len = bytes.length;
+        log.info("ase key len: {}", length);
         String publicKey = keyMap.get("rsa_publicKey");
         String res = null;
         switch (enc.toUpperCase()) {

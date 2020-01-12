@@ -1,8 +1,10 @@
 package com.dc.backend.entity;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class EnvInfo {
     private String zkVersion;
     private String hostname;

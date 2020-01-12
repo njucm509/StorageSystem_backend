@@ -11,9 +11,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import tk.mybatis.mapper.entity.Example;
 
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 @Slf4j
 @Service
@@ -51,6 +56,36 @@ public class UserServiceImpl implements UserService {
         Page<User> pageInfo = (Page<User>) mapper.selectByExample(example);
         log.info("pageInfo: {}", pageInfo);
         return new PageResult<>(pageInfo.getTotal(), pageInfo);
+    }
+
+    @Override
+    public void multi(MultipartFile file) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(file.getInputStream()));
+        br.readLine();
+        List<User> list = new ArrayList<>();
+        String line = null;
+        while ((line = br.readLine()) != null) {
+            User user = new User();
+            String[] split = line.split(",");
+            user.setAccount(genereteAccount(8));
+            user.setRole(0);
+            user.setName(split[0]);
+            user.setPwd("12345678");
+            user.setCreateAt(new Date());
+            user.setUpdateAt(new Date());
+            list.add(user);
+        }
+        int i = mapper.insertList(list);
+        log.info("insert multi user {}", list);
+    }
+
+    private String genereteAccount(int len) {
+        StringBuilder sb = new StringBuilder();
+        Random random = new Random();
+        for (int i = 0; i < len; i++) {
+            sb.append(random.nextInt(10));
+        }
+        return sb.toString();
     }
 
     @Override

@@ -101,11 +101,11 @@ public class AESUtil {
         String str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
         String user = String.valueOf(userId);
         int len = user.length();
-        if (len > 8) {
-            user = user.substring(0, 8);
+        if (len > 16) {
+            user = user.substring(0, 16);
         } else {
             Random random = new Random();
-            for (int i = 0; i < 8 - len; i++) {
+            for (int i = 0; i < 16 - len; i++) {
                 int number = random.nextInt(52);
                 user += str.charAt(number);
             }

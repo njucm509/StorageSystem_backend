@@ -3,7 +3,9 @@ package com.dc.backend.service;
 import com.dc.backend.entity.PageParam;
 import com.dc.backend.entity.PageResult;
 import com.dc.backend.pojo.User;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface UserService {
@@ -20,4 +22,6 @@ public interface UserService {
     void update(User user);
 
     PageResult<User> queryUserByPageAndSort(PageParam pageParam);
+
+    void multi(MultipartFile file) throws IOException;
 }

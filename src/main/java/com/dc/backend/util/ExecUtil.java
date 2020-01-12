@@ -1,21 +1,19 @@
 package com.dc.backend.util;
 
-import com.dc.backend.entity.Device;
+import com.dc.backend.entity.DeviceInfo;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 @Slf4j
 public class ExecUtil {
-    public static List<Device> getDeviceInfo() {
-        List<Device> list = new ArrayList<>();
-        Device device = new Device();
+    public static List<DeviceInfo> getDeviceInfo() {
+        List<DeviceInfo> list = new ArrayList<>();
+        DeviceInfo deviceInfo = DeviceInfo.getInstance();
         try {
             Process ps = Runtime.getRuntime().exec("ls /");
             BufferedReader br = new BufferedReader(new InputStreamReader(ps.getInputStream()));

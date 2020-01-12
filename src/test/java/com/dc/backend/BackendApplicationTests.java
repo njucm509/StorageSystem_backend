@@ -5,6 +5,7 @@ import com.dc.backend.params.FileParam;
 import com.dc.backend.pojo.User;
 import com.dc.backend.service.EncryptionService;
 import com.dc.backend.service.FileService;
+import com.dc.backend.service.MonitorService;
 import com.dc.backend.service.SecretKeyService;
 import com.dc.backend.service.impl.FileServiceImpl;
 import com.dc.backend.util.encrypt.aes.AESUtil;
@@ -32,6 +33,9 @@ public class BackendApplicationTests {
 
     @Autowired
 	EncryptionService encryptionService;
+
+    @Autowired
+    MonitorService monitorService;
 
     @Test
     public void contextLoads() {
@@ -93,4 +97,8 @@ public class BackendApplicationTests {
         log.info("aes key: {}---publicKey: {}---privateKey: {}", aesKey, pubKey, privateKey);
     }
 
+    @Test
+    public void testMonitor() throws IOException, InterruptedException {
+        monitorService.getDeviceInfo("master");
+    }
 }

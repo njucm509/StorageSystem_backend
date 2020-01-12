@@ -3,7 +3,6 @@ package com.dc.backend.util;
 import ch.ethz.ssh2.Connection;
 import ch.ethz.ssh2.Session;
 import ch.ethz.ssh2.StreamGobbler;
-import com.dc.backend.entity.Device;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.BufferedReader;

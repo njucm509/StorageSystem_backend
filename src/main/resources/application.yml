@@ -43,3 +43,12 @@ hadoop:
   hdfs:
     uri: localhost:8020
     userFilePath: /input
+cluster:
+  master: 10.200.200.55
+  master2: 10.200.200.55
+  slave1: 10.200.200.55
+  slave2: 10.200.200.55
+  slave3: 10.200.200.55
+  login:
+    name: weilin
+    password: 981025
