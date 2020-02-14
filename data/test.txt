@@ -1,8 +1,0 @@
-hello wang peng
-hello gu wei
-hello cai yu fei
-hello zhai wen bin
-hello world
-hello hadoop
-hello mapreduce
-hello yarn
