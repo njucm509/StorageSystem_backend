@@ -44,11 +44,11 @@ hadoop:
     uri: localhost:8020
     userFilePath: /input
 cluster:
-  master: 10.200.200.55
-  master2: 10.200.200.55
-  slave1: 10.200.200.55
-  slave2: 10.200.200.55
-  slave3: 10.200.200.55
+  master: 127.0.0.1
+  master2: 127.0.0.1
+  slave1: 127.0.0.1
+  slave2: 127.0.0.1
+  slave3: 127.0.0.1
   login:
     name: weilin
     password: 981025

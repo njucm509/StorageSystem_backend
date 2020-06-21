@@ -50,6 +50,9 @@ public class MyEncryptUtil {
             case "MD5":
                 res = MD5Util.encrypt(content);
                 break;
+            case "HE":
+                res = AESUtil.encrypt(content.getBytes(), aesKey.getBytes());
+                break;
         }
         return res;
     }

@@ -59,6 +59,7 @@ public class EncryptionServiceImpl implements EncryptionService, Serializable {
                 this.add("AES");
                 this.add("ECC");
                 this.add("MD5");
+                this.add("HE");
             }
         };
 
@@ -111,6 +112,14 @@ public class EncryptionServiceImpl implements EncryptionService, Serializable {
             public String call(String s) throws Exception {
                 log.info("s: {} ", s);
                 return MyEncryptUtil.encrypt(s, "rsa", keyList);
+            }
+        }, DataTypes.StringType);
+
+        sparkSession.udf().register("encryptByHE", new UDF1<String, String>() {
+            @Override
+            public String call(String s) throws Exception {
+                log.info("s: {} ", s);
+                return MyEncryptUtil.encrypt(s, "he", keyList);
             }
         }, DataTypes.StringType);
 

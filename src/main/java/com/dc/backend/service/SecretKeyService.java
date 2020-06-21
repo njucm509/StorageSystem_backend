@@ -56,6 +56,10 @@ public class SecretKeyService {
         SecretKey secretKey = new SecretKey();
         secretKey.setUserId(id);
         SecretKey key = mapper.selectOne(secretKey);
+        log.info("user id: {} key: {}", id, key);
+        if (key == null) {
+            return null;
+        }
         String initKey = key.getInitKey();
         ObjectMapper objectMapper = new ObjectMapper();
         HashMap map = null;

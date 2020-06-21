@@ -38,6 +38,14 @@ public class UserController {
         log.info("{} come in...", user);
         HashMap<String, Object> msg = new HashMap<>();
         User u = service.login(user);
+        List<HashMap<String, String>> secretKey = secretKeyService.getSecretKeyByUser(u.getId());
+        if (secretKey == null) {
+            try {
+                secretKeyService.initKey(u.getId());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         System.out.println(u);
         msg.put("msg", "ok");
         msg.put("user", u);

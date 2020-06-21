@@ -1,26 +1,11 @@
 package com.dc.backend.util;
 
-import com.dc.backend.params.FileHeaderParam;
-import com.dc.backend.params.FileParam;
-import com.dc.backend.pojo.User;
 import com.monitorjbl.xlsx.StreamingReader;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.hadoop.hbase.HTableDescriptor;
-import org.apache.hadoop.hbase.client.HBaseAdmin;
-import org.apache.hadoop.hbase.client.Put;
-import org.apache.hadoop.hbase.io.ImmutableBytesWritable;
-import org.apache.hadoop.hbase.mapreduce.TableOutputFormat;
-import org.apache.hadoop.mapreduce.Job;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
-import org.apache.spark.api.java.JavaPairRDD;
-import org.apache.spark.api.java.JavaSparkContext;
-import org.apache.spark.api.java.function.PairFunction;
-import org.springframework.stereotype.Component;
-import scala.Tuple2;
 
 import java.io.*;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Slf4j
